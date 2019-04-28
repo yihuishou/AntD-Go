@@ -19,7 +19,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
             .and()
             .authorizeRequests()
             .anyRequest()
-            .hasRole("user")
+            .authenticated()
             .and()
             .httpBasic()
             .disable();

@@ -23,6 +23,6 @@ public class CommonRole {
     private String note;
 
     @JoinColumn(name = "roleID")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CommonPermission> permissionList;
 }

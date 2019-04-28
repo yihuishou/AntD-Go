@@ -8,7 +8,7 @@ import com.jwtsecurity.model.Article;
 
 public interface ArticleServices {
 
-    Article findArticle(Integer id);
+    Article findOneArticle(Integer id);
 
     boolean deleteArticle(Integer id);
 

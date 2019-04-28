@@ -17,12 +17,9 @@ public class ArticleServicesImpl implements ArticleServices {
 
 
     @Override
-    public Article findArticle(Integer id) {
-
+    public Article findOneArticle(Integer id) {
 
         return articleDao.findOne(id);
-
-
     }
 
     @Override

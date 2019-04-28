@@ -30,10 +30,11 @@ public class CommonUser implements UserDetails {
     private Boolean unExpired = true;
 
     private Boolean unLocked = true;
+
     private Boolean Enabled = true;
 
     @JoinColumn(name = "userID")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CommonRole> roleList;
 
 
@@ -62,12 +63,12 @@ public class CommonUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override

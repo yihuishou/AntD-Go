@@ -18,26 +18,29 @@ public class ArticleController {
 
 
     @GetMapping("{id}")
-    public ResponseMessage getArticle(@PathVariable Integer id) {
-        Article article = articleServices.findArticle(id);
+    public ResponseMessage findOneArticle(@PathVariable Integer id) {
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
-        responseMessage.setData(article);
+
+        Article oneArticle = articleServices.findOneArticle(id);
+        responseMessage.setMessage("查询成功");
+        responseMessage.setStrutsCode("200");
+        responseMessage.setData(oneArticle);
+
         return responseMessage;
+
 
     }
 
 
-    @PutMapping("{id}")
-    public ResponseMessage updateArticle(@RequestBody Article article, @PathVariable Integer id) {
-
-        article.setId(id);
+    @PutMapping
+    public ResponseMessage updateArticle(@RequestBody Article article) {
 
         Article updateArticle = articleServices.updateArticle(article);
+
+
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
+        responseMessage.setMessage("更新成功");
+        responseMessage.setStrutsCode("200");
         responseMessage.setData(updateArticle);
         return responseMessage;
 
@@ -49,8 +52,8 @@ public class ArticleController {
         final Article addArticle = articleServices.addArticle(article);
 
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
+        responseMessage.setMessage("添加成功");
+        responseMessage.setStrutsCode("200");
         responseMessage.setData(addArticle);
         return responseMessage;
 
@@ -60,14 +63,16 @@ public class ArticleController {
     public ResponseMessage deleteArticle(@PathVariable Integer id) {
 
         ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setStrutsCode("400");
+        responseMessage.setData(null);
         responseMessage.setMessage("失败");
         if (articleServices.deleteArticle(id)) {
             responseMessage.setMessage("成功");
+            responseMessage.setStrutsCode("200");
+            responseMessage.setData(null);
         }
 
 
-        responseMessage.setStrutsCode("");
-        responseMessage.setData(null);
         return responseMessage;
 
     }
