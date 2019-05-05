@@ -20,9 +20,17 @@ public class UserController {
     @PostMapping
     public ResponseMessage addUser(@RequestBody CommonUser commonUser) {
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
-        responseMessage.setData(new Object());
+
+        CommonUser addUser = userServices.addUser(commonUser);
+        responseMessage.setMessage("添加失败");
+        responseMessage.setStrutsCode("400");
+        responseMessage.setData(null);
+        if (addUser != null) {
+            responseMessage.setMessage("添加成功");
+            responseMessage.setStrutsCode("200");
+            responseMessage.setData(addUser);
+        }
+
         return responseMessage;
 
     }
@@ -30,9 +38,15 @@ public class UserController {
     @DeleteMapping("{id}")
     public ResponseMessage deleteUser(@PathVariable Integer id) {
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
-        responseMessage.setData(new Object());
+        responseMessage.setMessage("删除失败");
+        responseMessage.setStrutsCode("400");
+        responseMessage.setData(null);
+
+        boolean deleteResult = userServices.deleteUser(id);
+        if (deleteResult) {
+            responseMessage.setMessage("删除成功");
+            responseMessage.setStrutsCode("200");
+        }
         return responseMessage;
 
     }
@@ -40,20 +54,28 @@ public class UserController {
     @PutMapping
     public ResponseMessage updateUser(@RequestBody CommonUser commonUser) {
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
+        responseMessage.setMessage("更新失败");
+        responseMessage.setStrutsCode("400");
         responseMessage.setData(new Object());
-        return responseMessage;
+        CommonUser updateUser = userServices.updateUser(commonUser);
+        if (updateUser != null) {
+            responseMessage.setMessage("更新成功");
+            responseMessage.setStrutsCode("200");
+            responseMessage.setData(updateUser);
+        }
 
+
+        return responseMessage;
 
     }
 
     @GetMapping("{id}")
     public ResponseMessage findOneUser(@PathVariable Integer id) {
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("");
-        responseMessage.setStrutsCode("");
-        responseMessage.setData(new Object());
+        final CommonUser oneUser = userServices.findOneUser(id);
+        responseMessage.setMessage("查询成功");
+        responseMessage.setStrutsCode("200");
+        responseMessage.setData(oneUser);
         return responseMessage;
 
     }
