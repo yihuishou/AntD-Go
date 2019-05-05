@@ -20,15 +20,11 @@ public class ArticleController {
     @GetMapping("{id}")
     public ResponseMessage findOneArticle(@PathVariable Integer id) {
         ResponseMessage responseMessage = new ResponseMessage();
-
         Article oneArticle = articleServices.findOneArticle(id);
         responseMessage.setMessage("查询成功");
         responseMessage.setStrutsCode("200");
         responseMessage.setData(oneArticle);
-
         return responseMessage;
-
-
     }
 
 
@@ -36,8 +32,6 @@ public class ArticleController {
     public ResponseMessage updateArticle(@RequestBody Article article) {
 
         Article updateArticle = articleServices.updateArticle(article);
-
-
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setMessage("更新成功");
         responseMessage.setStrutsCode("200");
@@ -50,7 +44,6 @@ public class ArticleController {
     public ResponseMessage addNewArticle(@RequestBody Article article) {
 
         final Article addArticle = articleServices.addArticle(article);
-
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setMessage("添加成功");
         responseMessage.setStrutsCode("200");
@@ -72,8 +65,6 @@ public class ArticleController {
             responseMessage.setData(null);
         }
 
-
         return responseMessage;
-
     }
 }
